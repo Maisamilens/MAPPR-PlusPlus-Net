@@ -1,0 +1,116 @@
+# MAPPR++-Net Configuration for IRSTD-1k Dataset
+# ============================================================
+
+# Dataset Configuration
+DATASET:
+  NAME: "IRSTD1k"
+  IMG_DIR: "D:/PhD Publications/Target Detection/data/IRSTD-1k/IRSTD-1k/IRSTD1k_Img"
+  MASK_DIR: "D:/PhD Publications/Target Detection/data/IRSTD-1k/IRSTD-1k/IRSTD1k_Label"
+  LABEL_DIR: "D:/PhD Publications/Target Detection/data/IRSTD-1k/IRSTD-1k/labels"
+  TRAIN_FILE: "D:/PhD Publications/Target Detection/data/IRSTD-1k/IRSTD-1k/trainval.txt"
+  TEST_FILE: "D:/PhD Publications/Target Detection/data/IRSTD-1k/IRSTD-1k/test.txt"
+  NUM_CLASSES: 1
+  CLASS_NAMES: ["target"]
+  TRAIN_RATIO: 0.6
+  VAL_RATIO: 0.2
+  TEST_RATIO: 0.2
+
+# Model Configuration
+MODEL:
+  NAME: "MAPPRPPNet"
+  BACKBONE: "resnet18"
+  PRETRAINED: True
+  
+  # STKE Module
+  STKE:
+    ENABLED: True
+    REDUCTION: 4
+    
+  # KAFF Module
+  KAFF:
+    ENABLED: True
+    
+  # CFPR Module
+  CFPR:
+    ENABLED: True
+    LRSA_DIM: 64
+    REPC3_DIM: 128
+    
+  # MARF++ Block
+  MARFPP:
+    ENABLED: True
+    NUM_PATHS: 3
+    DPS_ENABLED: True
+    CPI_ENABLED: True
+    MSFP_ENABLED: True
+    
+  # AGRM Module
+  AGRM:
+    ENABLED: True
+    REDUCTION: 16
+    
+  # CARM Module
+  CARM:
+    ENABLED: True
+    ASPP_RATES: [1, 6, 12, 18]
+    REDUCTION: 16
+    
+  # Decoder
+  DECODER:
+    NUM_QUERIES: 300
+    NUM_DECODER_LAYERS: 3
+    NUM_ENCODER_LAYERS: 2
+    DIM_FEEDFORWARD: 1024
+    DROPOUT: 0.1
+    NUM_HEADS: 8
+
+# Training Configuration
+TRAIN:
+  EPOCHS: 300
+  BATCH_SIZE: 4
+  NUM_WORKERS: 4
+  LR: 0.0001
+  WEIGHT_DECAY: 0.0001
+  LR_SCHEDULER: "cosine"
+  WARMUP_EPOCHS: 10
+  WARMUP_LR: 0.000001
+  
+  # Loss weights
+  ALPHA: 1.0   # aux loss weight
+  BETA: 1.0    # denoising loss weight
+  LAMBDA_L1: 5.0
+  LAMBDA_GIOU: 2.0
+  CLS_LOSS_WEIGHT: 1.0
+
+# Testing Configuration
+TEST:
+  BATCH_SIZE: 1
+  CONF_THRESH: 0.3
+  NMS_THRESH: 0.5
+  IOU_THRESH: 0.5
+
+# Prediction Configuration
+PREDICT:
+  CONF_THRESH: 0.25
+  NMS_THRESH: 0.5
+
+# Visualization Configuration
+VIS:
+  SAVE_DIR: "visualizations"
+  SHOW_CONFIDENCE: True
+  COLORMAP: "hot"
+  TARGET_COLOR: [0, 255, 0]    # Green for correct
+  MISS_COLOR: [255, 0, 0]      # Blue for missed
+  FALSE_ALARM_COLOR: [0, 255, 255]  # Yellow for false alarm
+
+# Paths
+PATHS:
+  CHECKPOINT_DIR: "checkpoints"
+  LOG_DIR: "logs"
+  PREDICTION_DIR: "predictions"
+  VISUALIZATION_DIR: "visualizations"
+  RUNS_DIR: "runs"
+
+# Device
+DEVICE: "cuda"
+SEED: 42
