@@ -452,10 +452,4 @@ for additional details.
 
 ---
 
-## Contact
-
-Maisam Abbas  
-Department of Computer Science and Engineering  
-Yuan Ze University, Taiwan  
-
 Email: s1129105@mail.yzu.edu.tw
