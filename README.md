@@ -447,9 +447,3 @@ See:
 ```text
 LICENSE
 ```
-
-for additional details.
-
----
-
-Email: s1129105@mail.yzu.edu.tw
