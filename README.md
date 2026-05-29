@@ -432,7 +432,7 @@ https://github.com/meituan/YOLOv6
   title={MAPPR++-Net: Multi-Path Attention and Progressive Perception Refinement Plus Plus Network for Infrared Small Target Detection},
   author={Abbas, Maisam and Hussain, Muhammad and Ali, Qaisar and Hassan, Muhammad and Wang, Ran-Zan},
   journal={IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing},
-  year={2025}
+  year={2026}
 }
 ```
 
